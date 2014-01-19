@@ -13,6 +13,8 @@ import javax.imageio.ImageIO;
  */
 
 /**
+ * Wrapping up Qaop to generate a screenshot.
+ * 
  * @author Andrew Jackson <Andrew.Jackson@bl.uk>
  *
  */
@@ -31,12 +33,31 @@ public class QaopShot {
 		String file = args[0];
 		
 		// Take shot and save as PNG
-		ImageIO.write( takeScreenshot( file, 3), "png",new File(file+".png"));
+		takeScreenshot(file, file+".png", 3);
 		
 		// Close:
 		System.exit(0);
 	}
 	
+	/**
+	 * Take a screenshot and save it as a PNG file.
+	 * 
+	 * @param input
+	 * @param output
+	 * @param delay
+	 * @throws IOException
+	 */
+	public static void takeScreenshot( String input, String output, int delay) throws IOException {
+		ImageIO.write( takeScreenshot( input, 3), "png",new File(output));
+	}
+	
+	/**
+	 * Fire up a spectrum emulator, wait, and then take a screenshot.
+	 * 
+	 * @param input
+	 * @param delay in seconds
+	 * @return
+	 */
 	public static BufferedImage takeScreenshot( String input, int delay) {
 		Frame f = new Frame("Qaop");
 		Qaop q = new Qaop();
