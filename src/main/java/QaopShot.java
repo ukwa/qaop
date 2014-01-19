@@ -19,6 +19,8 @@ import javax.imageio.ImageIO;
 public class QaopShot {
 
 	/**
+	 * Takes a screenshot of the emulator, after waiting a short while.
+	 * 
 	 * @param args
 	 * @throws IOException 
 	 */
@@ -47,7 +49,7 @@ public class QaopShot {
 		
 		// Wait for three seconds:
 		try {
-			Thread.sleep(1000*3);
+			Thread.sleep(1000*2);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
