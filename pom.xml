@@ -60,6 +60,7 @@
             <configuration>
                <verbose>false</verbose>
             </configuration>
+<!--
             <executions>
                <execution>
                   <id>first</id>
@@ -69,6 +70,7 @@
                   <phase>process-sources</phase>
                </execution>
             </executions>
+-->
          </plugin>
          <plugin>
             <groupId>org.sonatype.plugins</groupId>
