@@ -21,35 +21,44 @@ public class QaopShot {
 	/**
 	 * Takes a screenshot of the emulator, after waiting a short while.
 	 * 
+	 * Can be passed a URL, but is a little slow, so makes timing the shot more brittle.
+	 * 
 	 * @param args
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
+		// Get filename:
+		String file = args[0];
+		
+		// Take shot and save as PNG
+		ImageIO.write( takeScreenshot( file, 3), "png",new File(file+".png"));
+		
+		// Close:
+		System.exit(0);
+	}
+	
+	public static BufferedImage takeScreenshot( String input, int delay) {
 		Frame f = new Frame("Qaop");
 		Qaop q = new Qaop();
 		
 		Hashtable<String,String> p = new Hashtable<String, String>();
-		for(int n=0; n<args.length; n++) {
-			String a = args[n];
-			if(a.matches("\\w+=.*")) {
-				int i = a.indexOf('=');
-				p.put(a.substring(0,i), a.substring(i+1));
-			} else
-				p.put("load", a);
-		}
-		Qaop.param = p;
-
+		p.put("load", input);
+		// Disable audio:
+		p.put("ay", "0");
+		
 		f.setBackground(new Color(0x222222));
 		f.add(q);
 		f.addWindowListener(q);
 		f.addKeyListener(q);
 		f.pack();
+
+		Qaop.param = p;
 		q.init();
 		f.setVisible(true);
 		
 		// Wait for three seconds:
 		try {
-			Thread.sleep(1000*2);
+			Thread.sleep(1000*3);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,12 +71,12 @@ public class QaopShot {
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics big = bi.getGraphics();
         q.paint(big);
-		ImageIO.write(bi, "png",new File("specshot.png"));
-		
-		// Close:
+        
+        // Shutdown:
 		f.setVisible(false);
 		f.dispose();
-		System.exit(0);
+        
+        return bi;
 	}
 
 }
