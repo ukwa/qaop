@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
@@ -48,7 +50,31 @@ public class QaopShot {
 	 * @throws IOException
 	 */
 	public static void takeScreenshot( String input, String output, int delay) throws IOException {
-		ImageIO.write( takeScreenshot( input, 3), "png",new File(output));
+		ImageIO.write( takeScreenshot( input, delay), "png",new File(output));
+	}
+	
+	/**
+	 * 
+	 * @param input
+	 * @param outputstream
+	 * @param delay
+	 * @throws IOException
+	 */
+	public static void takeScreenshot( String input, OutputStream outputstream, int delay) throws IOException {
+		ImageIO.write( takeScreenshot( input, delay), "png", outputstream);
+	}
+
+	/**
+	 * 
+	 * @param inputstream
+	 * @param extension e.g. "tap" to indicated this is a TAP file.
+	 * @param outputstream
+	 * @param delay
+	 * @throws IOException
+	 */
+	public static void takeScreenshot( InputStream inputstream, String extension, OutputStream outputstream, int delay) throws IOException {
+		File input = File.createTempFile("spectrum-tape", "."+extension);
+		ImageIO.write( takeScreenshot( input.getCanonicalPath(), delay), "png", outputstream);
 	}
 	
 	/**
