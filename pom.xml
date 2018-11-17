@@ -49,9 +49,17 @@
             <artifactId>maven-compiler-plugin</artifactId>
             <version>2.3.2</version>
             <configuration>
-               <source>1.6</source>
-               <target>1.6</target>
+               <source>1.8</source>
+               <target>1.8</target>
             </configuration>
+         </plugin>
+         <plugin>
+         	<groupId>org.codehaus.mojo</groupId>
+         	<artifactId>exec-maven-plugin</artifactId>
+         	<version>1.6.0</version>
+         	<configuration>
+         		<mainClass>uk.bl.wa.access.qaop.Qaop</mainClass>
+         	</configuration>
          </plugin>
          <plugin>
             <groupId>org.codehaus.mojo</groupId>
@@ -60,17 +68,6 @@
             <configuration>
                <verbose>false</verbose>
             </configuration>
-<!--
-            <executions>
-               <execution>
-                  <id>first</id>
-                  <goals>
-                     <goal>update-file-header</goal>
-                  </goals>
-                  <phase>process-sources</phase>
-               </execution>
-            </executions>
--->
          </plugin>
          <plugin>
             <groupId>org.sonatype.plugins</groupId>
